@@ -56,9 +56,14 @@ from sklearn.preprocessing import StandardScaler
 sc = StandardScaler()
 sc.fit(X_train)
 
+
 X_train_std = sc.transform(X_train)
 X_test_std = sc.transform(X_test)
 x_final_std = sc.transform(x_final)
+
+sc.fit(X)
+X_std = sc.transform(X)
+
 
 #_______________________________________________________________________________________________________________________________________
 
@@ -118,6 +123,8 @@ print('Ensemble Test score: ', accuracy_score(y_test, y_test_predicted_ensemble)
 #_________________________________________________________________________________________________________________________________________
 
 # Predict the Test set for submission on kaggle
+
+final_voting_clf.fit(X_std,y)
 
 y_final_predicted_ensemble = final_voting_clf.predict(x_final_std)
 
